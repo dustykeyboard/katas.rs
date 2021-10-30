@@ -12,14 +12,15 @@ pub fn serialize(grid: [[usize; 9]; 9]) -> String {
 pub fn deserialize(source: &str) -> [[usize; 9]; 9] {
   let mut grid: [[usize; 9]; 9] = [[0; 9]; 9];
   let chars: Vec<char> = source.chars().collect();
-  for i in 0..9 {
-    for j in 0..9 {
-      grid[i][j] = 0;
-      let value = chars[i * 10 + j];
-      if value.is_numeric() {
-        grid[i][j] = value.to_string().parse::<usize>().unwrap();
-      }
+  let mut char_index = 0;
+  let mut grid_index = 0;
+  while char_index < chars.len() {
+    let value = chars[char_index];
+    if value.is_numeric() {
+      grid[grid_index / 9][grid_index % 9] = value.to_string().parse::<usize>().unwrap();
+      grid_index += 1;
     }
+    char_index += 1;
   }
   return grid;
 }
