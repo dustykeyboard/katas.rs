@@ -1,4 +1,4 @@
-pub fn serialize(grid: [[usize; 9]; 9]) -> String {
+pub fn serialize(&grid: &[[usize; 9]; 9]) -> String {
   let mut output = String::new();
   for i in 0..9 {
     for j in 0..9 {
@@ -62,7 +62,7 @@ mod tests {
 
   #[test]
   fn grid_to_string() {
-    assert_eq!(serialize(GRID), STRING);
+    assert_eq!(serialize(&GRID), STRING);
   }
 
   #[test]
