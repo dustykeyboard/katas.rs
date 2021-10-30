@@ -1,3 +1,4 @@
+mod loader;
 mod validators;
 
 fn main() {
