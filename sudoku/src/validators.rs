@@ -1,5 +1,5 @@
 /// Validate if a number can be placed in a position on a given grid
-pub fn duplicate(grid: [[usize; 9]; 9], x: usize, y: usize, n: usize) -> bool {
+pub fn is_valid(grid: [[usize; 9]; 9], y: usize, x: usize, n: usize) -> bool {
   // Fail validation if n exists in row
   for i in 0..9 {
     if grid[y][i] == n {
@@ -35,33 +35,33 @@ mod tests {
   
   static GRID: [[usize; 9]; 9] = [
     [1,0,0,0,0,0,0,0,0],
+    [0,2,0,0,0,0,0,0,0],
+    [0,0,3,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,6,0,0,0],
+    [0,0,0,0,0,0,7,0,0],
+    [0,0,0,0,0,0,0,8,9],
   ];
 
   #[test]
-  fn duplicate_row() {
-    assert_eq!(duplicate(GRID, 0, 5, 1), false);
+  fn row_is_not_valid() {
+    assert_eq!(is_valid(GRID, 0, 5, 1), false);
   }
 
   #[test]
-  fn duplicate_column() {
-    assert_eq!(duplicate(GRID, 5, 0, 1), false);
+  fn column_is_not_valid() {
+    assert_eq!(is_valid(GRID, 5, 0, 1), false);
   }
 
   #[test]
-  fn duplicate_square() {
-    assert_eq!(duplicate(GRID, 2, 2, 1), false);
+  fn house_is_not_valid() {
+    assert_eq!(is_valid(GRID, 2, 1, 1), false);
   }
 
   #[test]
-  fn not_duplicate() {
-    assert_eq!(duplicate(GRID, 0, 0, 2), true);
+  fn grid_is_valid() {
+    assert_eq!(is_valid(GRID, 1, 4, 1), true);
   }
 }
