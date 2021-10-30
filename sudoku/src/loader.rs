@@ -1,10 +1,16 @@
-pub fn serialize(grid: [[usize; 9]; 9]) -> String {
+pub fn serialize(&grid: &[[usize; 9]; 9]) -> String {
   let mut output = String::new();
   for i in 0..9 {
     for j in 0..9 {
       output.push_str(grid[i][j].to_string().as_str());
+      if j == 2 || j == 5 {
+        output.push('|')
+      }
     }
     output.push('\n');
+      if i == 2 || i == 5 {
+        output.push_str("---+---+---\n")
+      }
   }
   return output;
 }
@@ -41,20 +47,22 @@ mod tests {
     [0,0,0,0,0,0,0,8,9],
   ];
   static STRING: &str = "\
-100000000
-020000000
-003000000
-000000000
-000000000
-000000000
-000006000
-000000700
-000000089
+100|000|000
+020|000|000
+003|000|000
+---+---+---
+000|000|000
+000|000|000
+000|000|000
+---+---+---
+000|006|000
+000|000|700
+000|000|089
 ";
 
   #[test]
   fn grid_to_string() {
-    assert_eq!(serialize(GRID), STRING);
+    assert_eq!(serialize(&GRID), STRING);
   }
 
   #[test]
