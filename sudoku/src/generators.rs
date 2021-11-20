@@ -4,12 +4,12 @@ use rand::thread_rng;
 // generate filled grid
 pub fn generate_grid() -> [[usize; 9]; 9] {
     let mut grid: [[usize; 9]; 9] = [[0; 9]; 9];
-    let seed: [usize; 9] = generate_seed_column();
+    let seed: [usize; 9] = generate_first_row();
 
-    grid[0] = [seed[0],seed[1],seed[2],seed[3],seed[4],seed[5],seed[6],seed[7],seed[8]];
+    grid[0] = seed;
     grid[1] = [seed[3],seed[4],seed[5],seed[6],seed[7],seed[8],seed[0],seed[1],seed[2]];
     grid[2] = [seed[6],seed[7],seed[8],seed[0],seed[1],seed[2],seed[3],seed[4],seed[5]];
-    grid[4] = [seed[1],seed[2],seed[3],seed[4],seed[5],seed[6],seed[7],seed[8],seed[0]];
+    grid[3] = [seed[1],seed[2],seed[3],seed[4],seed[5],seed[6],seed[7],seed[8],seed[0]];
     grid[4] = [seed[4],seed[5],seed[6],seed[7],seed[8],seed[0],seed[1],seed[2],seed[3]];
     grid[5] = [seed[7],seed[8],seed[0],seed[1],seed[2],seed[3],seed[4],seed[5],seed[6]];
     grid[6] = [seed[2],seed[3],seed[4],seed[5],seed[6],seed[7],seed[8],seed[0],seed[1]];
@@ -20,7 +20,7 @@ pub fn generate_grid() -> [[usize; 9]; 9] {
 }
 
 // generate column
-fn generate_seed_column() -> [usize; 9] {
+fn generate_first_row() -> [usize; 9] {
   let mut rng = thread_rng();
   let mut column: [usize; 9] = [1,2,3,4,5,6,7,8,9];
   column.shuffle(&mut rng);
@@ -30,11 +30,11 @@ fn generate_seed_column() -> [usize; 9] {
 // remove numbers
 pub fn remove_numbers(grid: &mut [[usize; 9]; 9]) {
   let mut rng = thread_rng();
-  let mut order: [usize; 9] = [0,1,2,3,4,5,6,7,8];
-  order.shuffle(&mut rng);
+  let mut indexes: [usize; 9] = [0,1,2,3,4,5,6,7,8];
+  indexes.shuffle(&mut rng);
 
-  for i in order {
-    for j in order {
+  for i in indexes {
+    for j in indexes {
       let possibilities = num_possibilities(*grid, i, j);
       if possibilities <= 1 {
         grid[i][j] = 0;
