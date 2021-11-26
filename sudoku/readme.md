@@ -1,6 +1,6 @@
 # Sudoku
 
-This application will attempt to generate a sudoku puzzle and then solve it, writing the problem to `puzzle.txt` and answer to `solution.txt`.
+This application will attempt to generate a [sudoku](https://en.wikipedia.org/wiki/Sudoku) puzzle and then solve it, writing the problem to `puzzle.txt` and answer to `solution.txt`.
 
 ## Generate a puzzle
 
